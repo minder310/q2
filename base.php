@@ -33,8 +33,10 @@ class DB
     // class內部function。
     // 參數內容必須是key-value型態陣列。
     // 每一個陣列元素會轉為字串，並暫時存入tmp陣列中。
+                                    // 輸入的資料應該是["key值"=>"value值"]。
     private function arrayToSqlArray($array)
     {
+        // 將key值與value值分開來並且，轉成$key=$value，並轉成陣列。
         foreach ($array as $key => $value) {
             $tmp[] = "`$key`='$value'";
         }
@@ -73,7 +75,9 @@ class DB
                 $sql = $sql . $con;
             }
         }
-        dd($sql);
+        // dd($sql);
+                                    // fetchcolumn將結果，儲存在行回傳。是字串。
+        return $this->pdo->query($sql)->fetchColumn();
     }
     // 這邊還沒看懂
     public function count(...$arg){
@@ -131,7 +135,9 @@ class DB
         } else {
             $sql = $sql . " where `id` = '$id' ";
         }
-        dd($sql);
+        // dd($sql);
+                                        // 輸出一個數列。或格子。
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     // 刪除資料table->del($id)-刪除資料。
     // 預設是id輸入id號碼即可，如果是陣列就要[key值=>value值]。
@@ -168,6 +174,7 @@ class DB
             
         }
         dd($sql);
+        return $this->pdo->exec($sql);
     }
     public function q($sql){
         // 
@@ -175,4 +182,23 @@ class DB
         $pdo=new PDO($dsn,'root','');
         return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+}
+$user=new DB("user");
+$total=new DB("total");
+$news=new DB("news");
+$que=new DB("que");
+$log=new DB("log");
+
+if(!isset($_SESSION['total'])){
+    // 
+    $today=$total->find(['date'=>date("Y-m-d")]);
+    // 如果$today==0,null，或是不存在。
+    if(empty($today)){
+        // 沒有今天的資料->更新
+        $today=['date'=>date("Y-m-d"),'total'=>1];
+    }else{
+        $today['total']++;
+    }
+    // dd($total->save($today));
+    $_SESSION['total']=1;
 }
