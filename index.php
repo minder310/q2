@@ -12,10 +12,7 @@
 </head>
 
 <body>
-	<?php include "./base.php" 
-	
-	
-	?>
+	<?php include "./base.php" ?>
 	<div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
 		<pre id="ssaa"></pre>
 	</div>
@@ -23,6 +20,7 @@
 	<div id="all">
 		<?php include "./fornt/header.php"; ?>
 		<div id="mm">
+
 			<div class="hal" id="lef">
 				<a class="blo" href="?do=po">分類網誌</a>
 				<a class="blo" href="?do=news">最新文章</a>
@@ -31,29 +29,32 @@
 				<a class="blo" href="?do=que">問卷調查</a>
 			</div>
 			<div class="hal" id="main">
+				<marquee>
+					請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章
+				</marquee>
+				<span style="width:18%; display:inline-block;">
+					<a href="?do=login">會員登入</a>
+				</span>
 				<?php
-					// 宣告一個do=$_get['do'];
-					$do=$_GET['do']??'home';
-					// 宣告一$file=指定資料夾，的do.php。
-					$file="./front/".$do.".php";
-					if(file_exists($file)){
-						include $file;
-					}else{
-						include "./fornt/home.php";
-					}
+				// 宣告一個do=$_get['do'];
+				$do = $_GET['do'] ?? 'home';
+				// 宣告一$file=指定資料夾，的do.php。
+				$file = "./fornt/" . $do . ".php";
+				if (file_exists($file)) {
+					include $file;
+				} else {
+					include "./fornt/home.php";
+				}
 				?>
 				<div>
 
-					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
-					</span>
 					<div class="">
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="bottom">
-			本網站建議使用：IE9.0以上版本，1024 x 768 pixels 以上觀賞瀏覽 ， Copyright © 2012健康促進網社群平台 All Right Reserved
+			本網站建議使用：IE9.0以上版本，1024 x 768 pixels 以上觀賞瀏覽 ， Copyright © 2023健康促進網社群平台 All Right Reserved
 			<br>
 			服務信箱：health@test.labor.gov.tw<img src="./icon/02B02.jpg" width="45">
 		</div>
