@@ -20,6 +20,12 @@ class DB
     private $password = "";
     private $table;
     private $pdo;
+    public $type=[
+        1=>'健康新知',
+        2=>'菸害防制',
+        3=>'癌症治療',
+        4=>'慢性病預防'
+    ];
 
     // 宣告啟動class時自動啟動。
     public function __construct($table)
@@ -121,6 +127,7 @@ class DB
             $sql = $sql . $arg[1]; //串接SQL字串。
         }
         dd($sql);
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     // 查詢符合條件的單筆資料。
     // 預設是查詢id輸入id號碼即可，如果是陣列就要[key值=>value值]。
