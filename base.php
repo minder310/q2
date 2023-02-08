@@ -159,7 +159,7 @@ class DB
         if(isset($array['id'])){
             // 更新判斷，要是裡面有id即為更新原有資料所以會跑更新。
             $id=$array['id'];
-            // 刪除array陣列中的id選項，因為等等等會做整合。
+            // 刪除array陣列中的id選項，為自動生成值，所以存入時要做刪除。
             unset($array['id']);
             // 透過$this->arrayToSqlArray($array);將陣列轉換成字串。
             $tmp=$this->arrayToSqlArray($array);
@@ -199,6 +199,7 @@ if(!isset($_SESSION['total'])){
     }else{
         $today['total']++;
     }
-    // dd($total->save($today));
+    // 更新日期儲存進
+    $total->save($today);
     $_SESSION['total']=1;
 }
