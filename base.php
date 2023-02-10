@@ -39,7 +39,7 @@ class DB
     // class內部function。
     // 參數內容必須是key-value型態陣列。
     // 每一個陣列元素會轉為字串，並暫時存入tmp陣列中。
-                                    // 輸入的資料應該是["key值"=>"value值"]。
+                                    // 輸入的資料是["key值"=>"value值"]。
     private function arrayToSqlArray($array)
     {
         // 將key值與value值分開來並且，轉成$key=$value，並轉成陣列。
@@ -129,6 +129,7 @@ class DB
         dd($sql);
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+    // 以下是搜尋單筆資料，可以與all合併成一個公式即可。
     // 查詢符合條件的單筆資料。
     // 預設是查詢id輸入id號碼即可，如果是陣列就要[key值=>value值]。
     public function find($id)
@@ -160,6 +161,7 @@ class DB
             $sql = $sql . " where `id`='$id'";
         }
         dd($sql);
+        return $this->pdo->exec($sql);
     }
     // 新增/更新資料。
     public function save($array){
