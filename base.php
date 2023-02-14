@@ -92,6 +92,7 @@ class DB
     public function sum($col,...$arg){
         return $this->math('sum',$col,...$arg);
     }
+    // $type,max(sh=1,)
     public function max($col,...$arg){
         return $this->math('max',$col,...$arg);
     }
