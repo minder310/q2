@@ -62,6 +62,8 @@ class DB
                 if (isset($arg[0])) {
                     $con = $arg[0];
                 }
+                // echo "0";
+                // dd($sql);
                 break;
                 // 要是都不是會跑以下計算。
             default:
@@ -71,6 +73,8 @@ class DB
                 }
             //            帶入的功能。 從$this->table表單中。
              $sql="select $math($col) from $this->table";
+            //  echo "1";
+            //  dd($sql);
         }
         // 如果參數式這列，則要做字串的轉換後代入到sql語法字串中。
         if (isset($con)) {
@@ -80,7 +84,10 @@ class DB
             } else {
                 $sql = $sql . $con;
             }
+            // echo "2";
+            // dd($sql);
         }
+        // echo "3";
         // dd($sql);
                                     // fetchcolumn將結果，儲存在行回傳。是字串。
         return $this->pdo->query($sql)->fetchColumn();
