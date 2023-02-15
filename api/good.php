@@ -7,7 +7,18 @@ $news=$_POST['news'];
 $user=$_POST['user'];
 
 // 確認是否有投過票的。
+// 要是news
 $chk=$log->count(['news'=>$news,'user'=>$user]);
 $row=$news->find($news);
 
-if($chk)
+if($chk>0){
+    // 要收回讚。->刪除。
+    $log->del(['news'=>$news,'user'=>$user]);
+    $row['good']--;
+    $news->save($row);
+}else{
+    // 按讚->新增
+    $row["good"]++;
+    $log->save(['news'=>$news,'user'=>$user]);
+    $news->save($row);
+}
